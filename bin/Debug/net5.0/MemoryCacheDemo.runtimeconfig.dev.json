@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\ngocth\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\ngocth\\.nuget\\packages"
-    ]
-  }
-}
