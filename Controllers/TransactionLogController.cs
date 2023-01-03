@@ -14,7 +14,6 @@ namespace MemoryCacheDemo.Controllers
     public class TransactionLogController : ControllerBase
     {
         private readonly DistributedCacheContext _context;
-        public static List<string> KEYS = new();
 
         public TransactionLogController(DistributedCacheContext context)
         {
@@ -49,14 +48,14 @@ namespace MemoryCacheDemo.Controllers
         [HttpGet("keys")]
         public ActionResult Keys()
         {
-            return Ok(KEYS);
+            return Ok(DistributedCacheContext.KEYS);
         }
 
         [HttpGet]
         public ActionResult All()
         {
             List<Message> list = new();
-            KEYS.ForEach(x => list.Add(_context.GetFromCache<Message>(x)));
+            DistributedCacheContext.KEYS.ForEach(x => list.Add(_context.GetFromCache<Message>(x)));
             return Ok(list);
         }
     }

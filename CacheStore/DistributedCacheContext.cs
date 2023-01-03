@@ -16,6 +16,7 @@ namespace MemoryCacheDemo.CacheStore
     {
         private readonly IDistributedCache _cache;
         private readonly ILogger<DistributedCacheContext> _logger;
+        public static List<string> KEYS = new();
 
         public DistributedCacheContext(IDistributedCache cache, ILogger<DistributedCacheContext> logger)
         {
@@ -25,17 +26,17 @@ namespace MemoryCacheDemo.CacheStore
 
         public void SaveToCache<TModel>(TModel data, params object[] arrs) where TModel : class
         {
-            var keys = arrs.Cast<object>().Select(x => x.ToString());
+            var keys = arrs.Select(x => x.ToString());
             string key = typeof(TModel).Name + " - " + string.Join("-", keys);
             _logger.LogInformation(key);
-            TransactionLogController.KEYS.Add(key);
+            KEYS.Add(key);
             var json = JsonSerializer.Serialize(data);
             _cache.Set(key, Encoding.ASCII.GetBytes(json));
         }
 
         public TModel GetFromCache<TModel>(params object[] arrs) where TModel : class
         {
-            var keys = arrs.Cast<object>().Select(x => x.ToString());
+            var keys = arrs.Select(x => x.ToString());
             string key = typeof(TModel).Name + " - " + string.Join("-", keys);
             var json = _cache.GetString(key);
             var data = JsonSerializer.Deserialize<TModel>(json);
