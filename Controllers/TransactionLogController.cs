@@ -32,7 +32,7 @@ namespace MemoryCacheDemo.Controllers
                 AStatus = ParaStatus.ChoDuyet,
                 ACreateBy = DateTime.Now.ToString(),
                 ACreateDte = DateTime.Now,
-                AModifieBy = Guid.NewGuid().ToString() + '23',
+                AModifieBy = Guid.NewGuid().ToString() + '2',
                 AModifieDte = DateTime.Now,
                 AActiveBy = Guid.NewGuid().ToString() + "active by",
                 AActiveDte = DateTime.Now,
